@@ -182,8 +182,8 @@ THUMBNAIL_ALIASES = {
 }
 
 # AWS SETTINGS
-from S3 import CallingFormat
-AWS_CALLING_FORMAT = CallingFormat.SUBDOMAIN
+# from S3 import CallingFormat
+# AWS_CALLING_FORMAT = CallingFormat.SUBDOMAIN
 AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
 AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
 AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
@@ -192,7 +192,7 @@ MEDIA_URL = 'http://%s.amazonaws.com/media/' % AWS_STORAGE_BUCKET_NAME
 DEFAULT_FILE_STORAGE = 'et_issue_example.s3utils.MediaRootS3BotoStorage'
 STATICFILES_STORAGE = 'et_issue_example.s3utils.StaticRootS3BotoStorage'
 THUMBNAIL_DEFAULT_STORAGE = DEFAULT_FILE_STORAGE
-AWS_S3_SECURE_URLS = False
+AWS_S3_SECURE_URLS = True
 AWS_QUERYSTRING_AUTH = False
 # AWS_PRELOAD_METADATA = True
 # AWS_IS_GZIPPED = True

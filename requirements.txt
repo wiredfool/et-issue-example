@@ -2,7 +2,7 @@ Django==1.5.1
 South==0.8.1
 easy-thumbnails==1.2
 PIL==1.1.7
-boto==2.8.0
-django-storages==1.1.4
+boto==2.9.5
+django-storages==1.1.8
 django-debug-toolbar==0.9.4
 ipdb==0.7
