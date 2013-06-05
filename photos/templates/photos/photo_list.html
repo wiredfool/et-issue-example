@@ -1,0 +1,41 @@
+{% extends "photos/base.html" %}
+
+{% block base_content %}
+{% for object in object_list %}
+<h2>{{ object.photo.name }}</h2>
+<ul class="unstyled">
+    <li>
+        <div><img src="{{ object.photo.admin_thumbnail.url }}"></div>
+        <div>admin_thumbnail</div>
+    </li>
+    <li>
+        <div><img src="{{ object.photo.admin_thumbnail_small.url }}"></div>
+        <div>admin_thumbnail_small</div>
+    </li>
+    <li>
+        <div><img src="{{ object.photo.admin_thumbnail_cropped.url }}"></div>
+        <div>admin_thumbnail_cropped</div>
+    </li>
+    <li>
+        <div><img src="{{ object.photo.profile_photo_thumbnail.url }}"></div>
+        <div>profile_photo_thumbnail</div>
+    </li>
+    <li>
+        <div><img src="{{ object.photo.event_thumbnail.url }}"></div>
+        <div>event_thumbnail</div>
+    </li>
+    <li>
+        <div><img src="{{ object.photo.article_photo_thumbnail.url }}"></div>
+        <div>article_photo_thumbnail</div>
+    </li>
+    <li>
+        <div><img src="{{ object.photo.photoset_small.url }}"></div>
+        <div>photoset_small</div>
+    </li>
+    <li>
+        <div><img src="{{ object.photo.large_photo.url }}"></div>
+        <div>large_photo</div>
+    </li>
+</ul>
+{% endfor %}
+{% endblock base_content %}
