@@ -36,10 +36,13 @@ class Command(NoArgsCommand):
 
     def handle_noargs(self, **options):
 
+        START_TIME = time.time()
+
         for p in Photo.objects.all():
             self.stdout.write("Generating thumbnails for photo #%s" % p.pk)
             time_function(generate_all_aliases, *[p.photo], **{'include_global': True})
 
+        print('It took %.2f seconds to generate all thumbnails and aliases.' % (time.time() - START_TIME))
         import ipdb
         ipdb.set_trace()
         dump_garbage()
