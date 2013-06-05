@@ -2,3 +2,5 @@ db.sqlite3
 media/photo
 env.sh
 collected_static
+test_photos
+all_photos

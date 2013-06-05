@@ -181,9 +181,13 @@ THUMBNAIL_ALIASES = {
     },
 }
 
+# PIL FIX
+from PIL import ImageFile
+# The following fixes the PIL "Suspension not allowed here" error
+# 1048576 Bytes = 1M
+ImageFile.MAXBLOCK = 1048576
+
 # AWS SETTINGS
-# from S3 import CallingFormat
-# AWS_CALLING_FORMAT = CallingFormat.SUBDOMAIN
 AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
 AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
 AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
@@ -194,9 +198,3 @@ STATICFILES_STORAGE = 'et_issue_example.s3utils.StaticRootS3BotoStorage'
 THUMBNAIL_DEFAULT_STORAGE = DEFAULT_FILE_STORAGE
 AWS_S3_SECURE_URLS = True
 AWS_QUERYSTRING_AUTH = False
-# AWS_PRELOAD_METADATA = True
-# AWS_IS_GZIPPED = True
-# AWS_HEADERS = {
-#     'Expires': 'Thu, 19 Apr 2040 20:00:00 GMT',
-#     'Cache-Control': 'max-age=86400',
-# }
