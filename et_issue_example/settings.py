@@ -48,7 +48,7 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
-MEDIA_ROOT = os.path.join(DJANGO_PROJECT_ROOT, 'media')
+MEDIA_ROOT = ''
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -59,7 +59,7 @@ MEDIA_URL = '/media/'
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
-STATIC_ROOT = ''
+STATIC_ROOT = os.path.join(DJANGO_PROJECT_ROOT, 'collected_static')
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
@@ -124,6 +124,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'south',
     'easy_thumbnails',
+    'storages',
     'photos',
 )
 
@@ -155,3 +156,37 @@ LOGGING = {
         },
     }
 }
+# EASY THUMBNAIL SETTINGS
+THUMBNAIL_ALIASES = {
+    '': {
+        'admin_thumbnail': {'size': (120, 80), 'crop': 'scale', 'quality': 80},
+        'admin_thumbnail_small': {'size': (50, 50), 'crop': 'scale', 'quality': 80},
+        'admin_thumbnail_cropped': {'size': (120, 120), 'crop': 'crop', 'quality': 80},
+        'profile_photo_thumbnail': {'size': (170, 170), 'crop': 'crop', 'quality': 80},
+        'event_thumbnail': {'size': (160, 120), 'crop': 'crop', 'quality': 90},
+        'article_photo_thumbnail': {'size': (210, 280), 'quality': 80},
+        'photoset_large': {'size': (555, 370), 'quality': 80},
+        'photoset_small': {'size': (58, 40), 'crop': 'crop', 'quality': 80},
+        'large_photo': {'size': (960, 720), 'quality': 80},
+    },
+}
+
+# AWS SETTINGS
+from S3 import CallingFormat
+AWS_CALLING_FORMAT = CallingFormat.SUBDOMAIN
+AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
+AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
+AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
+STATIC_URL = 'http://%s.amazonaws.com/static/' % AWS_STORAGE_BUCKET_NAME
+MEDIA_URL = 'http://%s.amazonaws.com/media/' % AWS_STORAGE_BUCKET_NAME
+DEFAULT_FILE_STORAGE = 'et_issue_example.s3utils.MediaRootS3BotoStorage'
+STATICFILES_STORAGE = 'et_issue_example.s3utils.StaticRootS3BotoStorage'
+THUMBNAIL_DEFAULT_STORAGE = DEFAULT_FILE_STORAGE
+AWS_S3_SECURE_URLS = False
+AWS_QUERYSTRING_AUTH = False
+# AWS_PRELOAD_METADATA = True
+# AWS_IS_GZIPPED = True
+# AWS_HEADERS = {
+#     'Expires': 'Thu, 19 Apr 2040 20:00:00 GMT',
+#     'Cache-Control': 'max-age=86400',
+# }
