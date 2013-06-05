@@ -2,6 +2,8 @@ import os
 
 DJANGO_PROJECT_ROOT = os.path.abspath('%s/../' % os.path.dirname(__file__))
 
+INTERNAL_IPS = ('127.0.0.1',)
+
 DEBUG = True
 
 TEMPLATE_DEBUG = DEBUG
@@ -98,6 +100,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
 ROOT_URLCONF = 'et_issue_example.urls'
@@ -123,6 +126,7 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'south',
+    'debug_toolbar',
     'easy_thumbnails',
     'storages',
     'photos',
@@ -156,6 +160,12 @@ LOGGING = {
         },
     }
 }
+
+# DJANGO DEBUG TOOLBAR
+DEBUG_TOOLBAR_CONFIG = {
+    'INTERCEPT_REDIRECTS': False,
+}
+
 # EASY THUMBNAIL SETTINGS
 THUMBNAIL_ALIASES = {
     '': {
