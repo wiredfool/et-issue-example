@@ -10,16 +10,14 @@ class Command(NoArgsCommand):
 
         confirm = input("\n".join([
             '',
-            'Are you sure you want to delete all photos? (y/n) ',
+            'Are you sure you want to delete all thumbnails for all photos? (y/n) ',
         ]))
 
         if confirm != 'y':
-            raise CommandError("Deleting photos was cancelled.")
+            raise CommandError("Deleting thumbnails was cancelled.")
 
         for p in Photo.objects.all():
-            self.stdout.write('Deleting photo "%s" ...' % p.photo.name)
+            self.stdout.write('Deleting thumbnails for photo "%s" ...' % p.photo.name)
             p.photo.delete_thumbnails()
-            p.photo.storage.delete(p.photo.name)
-            p.delete()
 
-        self.stdout.write('All photos deleted succesfully.')
+        self.stdout.write('All thumbnails were deleted succesfully.')
