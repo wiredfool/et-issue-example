@@ -4,3 +4,4 @@ env.sh
 collected_static
 test_photos
 all_photos
+*.pyc
